@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Calculator</title>
+    <style>
+        h1 { 
+            font-size: larger;
+            font-family: Verdana;
+            font-weight: bold;
+            text-align: center;
+        } 
+        h2 {
+            font-size: large;
+            font-family: Trebuchet MS;
+            font-weight:600;
+            text-align: center;
+        }
+        h3 {
+            font-size: medium;
+            font-family: Trebuchet MS;
+            font-weight: 600;
+        }
+        
+        .bodytext {font-size: small;
+        text-align: center;
+        font-family: Courier;}
+        #container {max-width: 720px;
+        margin: 0, auto, 0, auto;
+        }
+
+        #layout {font-family: 'Courier New', Courier, monospace;
+        border-collapse: collapse;
+        width: 100%;
+        padding: auto;
+
+        }
+    </style>
+</head>
+<body>
+    
+        <h1>Construction Estimation Calculator</h1>
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink w3-blue" onclick="openCategory(event, 'Concreting')">Concreting</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Rebars')">Rebars</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Masonry')">Masonry</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Reinforcement')">Reinforcement</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Carpentry')">Carpentry</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Roofing Works')">Roofing Works</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Tiling Works')">Tiling Works</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Painting Works')">Painting Works</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openCategory(event,'Scaffoldings')">Scaffoldings</button>
+        </div>
+        <div id="Concreting" class="w3-container w3-border category">
+        <h2> Concreting </h2>
+        <table id="layout">
+            <caption> <h3> Wall Footing </h3> </caption>
+            <tr>
+                <td> Lenght (M) </td>
+                <td> <input type="number" id="Lenght" oninput="wallfooting()"> </td>
+            </tr>
+            <tr>
+                <td> Width (M) </td>
+                <td> <input type="number" id="Width" oninput="wallfooting()"> </td>
+            </tr>
+                <td> Thickness (M) </td>
+                <td> <input type= "number" id="Thickness" oninput="wallfooting()"> </td>
+            <tr> 
+                <td> Total volume of concrete </td>
+                <td id="TotalVolume"> </td>
+            </tr>
+            <tr>
+                <td> Number of Footing </td>
+                <td> <input type="number" id="Footing" oninput="wallfooting()"> </td>
+            </tr>
+            <tr>
+                <td> Total volume of concrete </td>
+                <td id="totalVolbyUnits"> </td>
+            </tr>
+            <tr> 
+                <td> Amount of Cement Bags</td>
+                <td id="cementbags"> </td>
+            </tr>
+            <tr>
+                <td> Volume of Sand </td>
+                <td id="volumeSand"> </td>
+            </tr>
+            <tr>
+                <td> Volume of 3/4" Gravel </td>
+                <td id="volumeGravel"> </td>
+            </tr>
+        </table>
+        </div>
+        <div id="Rebars" class=" w3-container w3-border category" style="display:none">
+            <h2> Rebars </h2>
+        </div>
+        <div id="Masonry" class=" w3-container w3-border category" style="display:none">
+            <h2> Masonry </h2>
+        </div>
+        <div id="Reinforcement" class=" w3-container w3-border category" style="display:none">
+            <h2> Reinforcement </h2>
+        </div>
+        <div id="Carpentry" class=" w3-container w3-border category" style="display:none">
+            <h2> Carpentry </h2>
+        </div>
+        <div id="Roofing Works" class=" w3-container w3-border category" style="display:none">
+            <h2> Roofing Works </h2>
+        </div>
+        <div id="Tiling Works" class=" w3-container w3-border category" style="display:none">
+            <h2> Tiling Works </h2>
+        </div>
+        <div id="Painting Works" class=" w3-container w3-border category" style="display:none">
+            <h2> Painting Works </h2>
+        </div>
+        <div id="Scaffoldings" class=" w3-container w3-border category" style="display:none">
+            <h2> Scaffoldings </h2>
+        </div>
+    
+<script>
+    function wallfooting(){
+        var amt_footing = document.getElementById('Footing').value;
+        var wallFooting_l = document.getElementById('Lenght').value;
+        var wallFooting_w = document.getElementById('Width').value;
+        var wallFooting_t = document.getElementById('Thickness').value;
+        var totalVol = wallFooting_l * wallFooting_w * wallFooting_t
+        var totalVolbyUnits= totalVol * amt_footing;
+       
+    if (wallFooting_l && wallFooting_w && wallFooting_t > 0 || null){    
+        document.getElementById('TotalVolume').textContent= totalVol + " cu.m.";
+        
+
+        if (totalVol && amt_footing > 0 || null){
+        document.getElementById('totalVolbyUnits').textContent= totalVol * amt_footing + " cu.m.";
+        document.getElementById('cementbags').textContent= totalVolbyUnits*9 + " bags";
+        document.getElementById('volumeSand').textContent= totalVolbyUnits*0.5 + " cu.m.";
+        document.getElementById('volumeGravel').textContent= totalVolbyUnits + " cu.m.";
+    }
+        else{
+        document.getElementById('totalVolbyUnits').textContent= "Input valid data.";
+        document.getElementById('cementbags').textContent= "";
+        document.getElementById('volumeSand').textContent= "";
+        document.getElementById('volumeGravel').textContent= "";}
+    
+    }
+    else
+        document.getElementById('TotalVolume').textContent="Input valid data.";
+    }
+    function openCategory(evt, categoryName){
+        var i;
+        var x = document.getElementsByClassName("category");
+        for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+  }
+    document.getElementById(categoryName).style.display = "block";
+    evt.currentTarget.className += " w3-blue";
+    }
+</script>
+</body>
+</html>
